@@ -65,6 +65,63 @@ func main() {
 	// Pointers
 	pointer1()
 	pointer2()
+
+	// Arrays and slice
+	// in go, we need to specify size of array
+	// initialized sequentially
+	names := [5]string{"a", "b", "c"}
+	// only capable of 5 elements
+	fmt.Println(names)
+	// if we want unlimited size array, we should use slice
+	names2 := []string{"a"}
+	fmt.Println(names2)
+	// but names2[1] = "bv" doesnt work. we need to use append()
+	fmt.Println(append(names2, "b"))
+	// As you can see, append doesnt modify names, but return new slice
+	// if you want to modify inside of names2, you have to change the slice value
+	names2 = append(names2, "b", "c")
+	fmt.Println(names2)
+
+	// encapsulation in Go
+	//  Structure
+	//    Struct Person is exported
+	//    Struct company is non-exported
+	//  Structure’s Method
+	//    Person Struct’s Method GetAge() is exported
+	//    Person Struct’s Method getName() is not exported
+	//  Structure’s Field
+	//    Person struct field Name is exported
+	//	  Person struct field age is not exported
+	//	Function
+	//	  Function GetPerson() is exported
+	//	  Function getCompanyName() is not exported
+	//	Variables
+	//	  Variable CompanyName is exported
+	//	  Variable companyLocation is not exported
+
+	// Maps
+	// map[<key type>]<value type>
+	nico := map[string]string{"name": "nico", "age": "12", "what": "who"}
+	fmt.Println(nico["age"])
+	for key, value := range nico {
+		fmt.Println(key, value)
+	}
+
+	// Struct
+	// How to initialize
+	favFood := []string{"kimchi", "ramen"}
+	// Sequential way, put value elements
+	nicoStruct := person{"nico", 12, favFood}
+	// Another way: Put field value
+	// nicoStruct := person{name: "nico", age: 12, favFood: favFood}
+	fmt.Println(nicoStruct)
+	// Go doesnt have constructor
+}
+
+type person struct {
+	name    string
+	age     int
+	favFood []string
 }
 
 // a int, b int >> a, b int
@@ -77,6 +134,7 @@ func lenAndUpper(name string) (int, string) {
 	return len(name), strings.ToUpper(name)
 }
 
+// ... can only be used in final argument
 func repeatMe(words ...string) {
 	fmt.Println(words)
 }
